@@ -1,0 +1,21 @@
+version: '3.3'
+
+services:
+
+   openresty:
+      build: ./dockerfile/openresty
+      image: phonecom/openresty
+      restart: always
+      privileged: true
+      ports:
+        - "8888:80"
+        - "4430:443"
+      volumes:
+        - "./etc/openresty/nginx.conf:/usr/local/openresty/nginx/conf/nginx.conf"
+        - "./etc/openresty/conf.d:/usr/local/openresty/nginx/conf/conf.d"
+        - "./project/lua:/lua"
+      command:
+        - /bin/sh
+        - -c
+        - |
+          while true;do sleep 100;done
